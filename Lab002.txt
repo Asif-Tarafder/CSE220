@@ -1,0 +1,389 @@
+# Name: MD ASIF
+# Id- 19201096
+#section -08
+
+#Linked List
+
+
+#Task-01(i)#
+class Node:
+    def __init__(self,element,nextAdress):
+        self.element=element
+        self.nextAdress=nextAdress
+######################################################
+           # Task-01_(ii) #
+
+class MyList:       
+      
+        #Task-02(1a)#
+        
+    def __init__(self,a):  
+        self.head=None
+        tail=None
+        for i in a:
+            node=Node(i,None)
+            if self.head==None:
+                self.head=node
+                tail=node
+            else:
+                tail.nextAdress=node
+                tail=node
+########To watch,am I successfully creat Linklist or not? #####
+        #self.showList()
+        #print("Link List Done")
+                  
+##################################################
+            #(Task-02_(2))#           
+    def showList(self):
+        tail=self.head
+        if self.head==None:
+            print("Empty List")
+        else:
+            while tail!=None:
+                print(tail.element,end=" ")
+                tail=tail.nextAdress
+#######################################################
+           #(Task-02_(3))#
+    def isEmpty(self):
+        if self.head==None:
+            return("True")
+        else:
+            return("False")
+#####################################################
+            #(Task-02_(4))#
+    def clear(self):
+        tail=self.head
+        if self.head==None:
+            print("Empty List")
+        else:
+            self.head=None
+            while tail!=None:
+                temp=tail.nextAdress
+                tail.nextAdress=None
+                tail=temp
+######################################################
+             #Task-02_(5)#
+    def insert_01(self, newElement):
+        check=self.head
+        bolien=0
+        while check!=None:
+            if check.element==newElement:
+                bolien=1
+                break
+            if (check.nextAdress==None):
+                node=Node(newElement,None)
+                check.nextAdress=node
+                break
+            check=check.nextAdress
+        if bolien==1:
+            print("The key already exists")
+#####################################################
+           #(Task-02_(6))#
+    def insert_02(self, newElement, index):
+        check=self.head
+        size=0
+        bolien=0
+        while check!=None:
+            if check.element==newElement:
+                bolien=1
+            size+=1
+            check=check.nextAdress
+            
+        if index>=0 and index<=size:
+            if bolien==1:
+                print("The key already exists")
+            
+            else:
+                insert=Node(newElement,None)
+                tail=self.head
+                temp=None
+                for i in range(size+1):
+                    if index==0:
+                        insert.nextAdress=self.head
+                        self.head=insert
+                        break
+                    elif i+1==index:
+                        temp=tail.nextAdress
+                        tail.nextAdress=insert
+                        insert.nextAdress=temp
+                        break
+                    tail=tail.nextAdress    
+        else:
+            print("Invalid index")
+######################################################
+              #(Task-02_(7))#
+
+    #   according to Sifat ma'am explanation # 
+    
+    def remove(self, deletekey):
+        check=self.head
+        temp=self.head
+        b=0
+        while check!=None:
+            if check.element==deletekey:
+                temp.nextAdress=check.nextAdress
+                b=1
+                break            
+            temp=check
+            check=check.nextAdress
+        if b==1:
+            return f'deletekey: {deletekey}'
+        else:
+            return("delete key are not in list")
+#..........................................................#
+
+#       another way #
+
+    def remove(self, deletekey):
+        tail=self.head
+        c=1
+        temp=tail
+        while tail != None:
+            if c==deletekey:
+                temp.nextAdress=tail.nextAdress
+                if temp==self.head:
+                    self.head=temp.nextAdress
+                return f'deletekey: {deletekey} value={tail.element}'
+            c=c+1
+            temp=tail   
+            tail=tail.nextAdress
+            
+                           
+#######################################################
+
+########################################################
+         #####(tester)#####
+
+##########################
+print("Linked list done")
+array=[10,20,30,40,50]
+obj=MyList(array)
+obj.showList()
+print()
+print()
+##########################
+print("Show Linked list:")
+obj.showList()
+print()
+print()
+##########################
+print("Linked list is empty-")
+print(obj.isEmpty())
+print()
+##########################(Insert without index)#
+print("Insertion in last index")
+obj.insert_01(60)
+obj.showList()
+print()
+print()
+##########################(Insert with index)#
+print("Insertion in any index")
+obj.insert_02(70,5)
+obj.showList()
+print()
+print()
+##########################
+print("Remove an Element: ")
+print(obj.remove(70))
+obj.showList()
+print()
+print()
+##########################
+print("Clear my Linked List")
+obj.clear()
+obj.showList()
+##################################
+
+
+
+
+#######################################################################
+#######################################################################
+#######################################################################
+
+
+
+#Task-3
+class Node:
+    def __init__(self,element,nextAdress):
+        self.element=element
+        self.nextAdress=nextAdress
+######################################################
+class MyList:
+    def __init__(self,a):
+        self.head=None
+        tail=None
+        for i in a:
+            node=Node(i,None)
+            if self.head==None:
+                self.head=node
+                tail=node
+            else:
+                tail.nextAdress=node
+                tail=node                 
+####################################################
+    def __str__(self):
+        tail=self.head
+        if self.head==None:
+            print("Empty List")
+        else:
+            l=""
+            while tail!=None:
+                if tail.nextAdress==None:
+                    l=l+str(tail.element)
+                else:
+                    l=l+str(tail.element)+"->"
+                tail=tail.nextAdress
+            return(l)
+#######################################################
+           #Task-03_(1)# 
+    def evenNumberList(self):
+        tail=self.head
+        newList=None
+        while tail!=None:
+            if tail.element%2==0:
+                node=Node(tail.element,None)
+                if newList==None:
+                    self.head=node
+                    newList=node
+                else:
+                    newList.nextAdress=node
+                    newList=node
+            tail=tail.nextAdress
+        print(self)
+#####################################################
+           #Task-03_(2)# 
+    def find_number_list(self,num):
+        tail=self.head
+        bolien=0
+        while tail!=None:
+            if tail.element==num:
+                bolien=1
+                return("True")
+            tail=tail.nextAdress
+        if bolien==0:
+            return("False")
+#######################################################
+          #Task-03_(3)# 
+    def reverseList(self):
+        temp=self.head
+        tail=temp.nextAdress
+        temp.nextAdress=None
+        s=None
+        while tail!=None:
+            s=tail.nextAdress
+            tail.nextAdress=temp
+            temp=tail
+            if s==None:
+                self.head=tail
+            tail=s
+        print(self)
+#####################################################  
+          #Task-03_(4)# 
+    def sort(self):
+        tail=self.head
+        while tail!=None:
+            minimum=tail.element
+            new=tail.nextAdress
+            temp=None
+            while new!=None:
+                if minimum>new.element:
+                    minimum=new.element
+                    temp=new
+                new=new.nextAdress
+            if temp!=None:
+                temp.element=tail.element
+                tail.element=minimum
+            tail=tail.nextAdress 
+        print(self) 
+#######################################################
+           #Task-03_(5)# 
+    def sumation(self):
+        tail=self.head
+        s=0
+        while tail!=None:
+            s=s+tail.element
+            tail=tail.nextAdress
+        print("Sum:",s)
+######################################################
+              #Task-03_(6)# 
+    def shifting(self,rotation,n):
+        if rotation=="left":
+            for i in range(n):
+                self.left_rotation()
+
+        if rotation=="right":
+            for i in range(n):
+                self.right_rotation()
+        print(self)
+#####################################################
+    def left_rotation(self):
+        tail=self.head
+        temp=None
+        while tail!=None:
+            if tail.nextAdress==None:
+                temp=self.head.nextAdress
+                tail.nextAdress=self.head
+                self.head.nextAdress=None
+                self.head=temp
+                break
+            tail=tail.nextAdress
+        #print(self)
+######################################################
+    def right_rotation(self):
+        tail=self.head
+        temp=None
+        while tail!=None:
+            if tail.nextAdress==None:
+                temp.nextAdress=None
+                tail.nextAdress=self.head
+                self.head=tail
+                break
+            temp=tail
+            tail=tail.nextAdress
+        #print(self)
+#####################################################
+
+#####################################################
+         ###Tester###
+
+#################################
+array=[1,2,5,3,8]
+#array=[101,120,25,91,87,1]
+obj=MyList(array)
+print("My linked list:",end=" ")
+print(obj)
+print()
+##################################
+print("Even Number Linked List")
+obj.evenNumberList()
+print()
+print()
+##################################
+print("Find Number")
+array=[1,2,5,3,8]
+#array=[101,120,25,91,87,1]
+obj=MyList(array)
+print(obj.find_number_list(7))
+#print(obj.find_number_list(87))
+print()
+print()
+################################
+print("Reverse List")
+obj.reverseList()
+print()
+print()
+################################
+print("summation:")
+obj.sumation()
+print()
+print()
+###############################
+print("Sort:")
+obj.sort()
+print()
+print()
+#############################
+print("Rotation")
+obj.shifting("right",2)
+obj.shifting("left",2)
